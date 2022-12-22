@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="stroke_width">1dp</dimen>
+    <dimen name="micro_padding">4dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="coords_padding">8dp</dimen>
+    <dimen name="medium_padding">12dp</dimen>
+    <dimen name="common_spacing">16dp</dimen>
+    <dimen name="icon_button_size">24dp</dimen>
+    <dimen name="big_icon_button_size">32dp</dimen>
+    <dimen name="avatar_size">48dp</dimen>
+    <dimen name="big_spacing">64dp</dimen>
+    <dimen name="card_width">72dp</dimen>
+    <dimen name="large_spacing">96dp</dimen>
+    <dimen name="company_margin">184dp</dimen>
+    <dimen name="image_height">240dp</dimen>
+    <dimen name="image_width">320dp</dimen>
+    <dimen name="big_size">400dp</dimen>
+    <dimen name="large_size">600dp</dimen>
+</resources>

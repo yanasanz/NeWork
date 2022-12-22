@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/postFeedFragment"
+        android:icon="@drawable/ic_posts_24"
+        android:title="Posts" />
+
+    <item
+        android:id="@+id/eventFeedFragment"
+        android:icon="@drawable/ic_events_24"
+        android:title="Events" />
+
+    <item
+        android:id="@+id/contactsFragment"
+        android:icon="@drawable/ic_contacts_24"
+        android:title="Contacts" />
+
+    <item
+        android:id="@+id/userProfileFragment"
+        android:icon="@drawable/ic_user_24"
+        android:title="User" />
+</menu>

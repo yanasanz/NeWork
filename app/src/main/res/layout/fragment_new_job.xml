@@ -1,0 +1,133 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.NewJobFragment">
+
+    <EditText
+        android:id="@+id/company"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_gravity="start"
+        android:paddingStart="@dimen/big_icon_button_size"
+        android:paddingEnd="@dimen/big_icon_button_size"
+        android:layout_marginStart="@dimen/small_padding"
+        android:layout_marginEnd="@dimen/small_padding"
+        android:layout_marginBottom="@dimen/icon_button_size"
+        android:layout_marginTop="@dimen/company_margin"
+        android:autofillHints="@string/position"
+        android:background="@drawable/textview_background"
+        android:hint="@string/company_name"
+        android:inputType="textMultiLine"
+        android:linksClickable="true" />
+
+    <EditText
+        android:id="@+id/position"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_gravity="start"
+        android:paddingStart="@dimen/big_icon_button_size"
+        android:paddingEnd="@dimen/big_icon_button_size"
+        android:layout_marginStart="@dimen/small_padding"
+        android:layout_marginEnd="@dimen/small_padding"
+        android:layout_marginBottom="@dimen/icon_button_size"
+        android:autofillHints="@string/position"
+        android:background="@drawable/textview_background"
+        android:hint="@string/position"
+        android:inputType="textMultiLine"
+        android:linksClickable="true" />
+
+    <EditText
+        android:id="@+id/add_start_date"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_marginStart="@dimen/small_padding"
+        android:layout_marginEnd="@dimen/small_padding"
+        android:layout_marginBottom="@dimen/icon_button_size"
+        android:autofillHints="@string/start_date"
+        android:background="@drawable/textview_background"
+        android:drawableStart="@drawable/ic_add_time_24"
+        android:drawableTint="@color/amber_700"
+        android:focusable="false"
+        android:hint="@string/start_date"
+        android:inputType="none"
+        android:padding="@dimen/small_padding"
+        android:textSize="18sp"
+        tools:ignore="TextFields"/>
+
+    <EditText
+        android:id="@+id/add_end_date"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_marginStart="@dimen/small_padding"
+        android:layout_marginEnd="@dimen/small_padding"
+        android:layout_marginBottom="@dimen/icon_button_size"
+        android:autofillHints="@string/end_date"
+        android:background="@drawable/textview_background"
+        android:drawableStart="@drawable/ic_add_time_24"
+        android:drawableTint="@color/amber_700"
+        android:focusable="false"
+        android:hint="@string/end_date"
+        android:inputType="none"
+        android:padding="@dimen/small_padding"
+        android:textSize="18sp"
+        tools:ignore="TextFields" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/icon_button_size"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding">
+
+        <EditText
+            android:id="@+id/link"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/avatar_size"
+            android:layout_marginEnd="0dp"
+            android:paddingStart="@dimen/big_icon_button_size"
+            android:autofillHints="no"
+            android:background="@drawable/textview_background_left_rounded"
+            android:hint="@string/add_link"
+            android:inputType="textPostalAddress"
+            android:paddingEnd="@dimen/small_padding"
+            app:layout_constraintEnd_toStartOf="@id/add_link"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_link"
+            android:layout_width="@dimen/big_spacing"
+            android:layout_height="@dimen/avatar_size"
+            android:layout_gravity="bottom"
+            android:background="@drawable/button_background"
+            android:text="@string/add_link"
+            android:textColor="@color/white"
+            app:icon="@drawable/ic_add_link_24"
+            app:iconTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/link"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RelativeOverlap,RtlSymmetry" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/small_padding"
+        android:backgroundTint="@color/amber_500"
+        android:clickable="true"
+        android:contentDescription="@string/add_post"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@id/button_panel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_check_24"
+        app:tint="@color/white" />
+
+</LinearLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/postFeedFragment">
+
+    <fragment
+        android:id="@+id/postFeedFragment"
+        android:name="com.example.nework.ui.PostFeedFragment"
+        android:label="fragment_post_feed"
+        tools:layout="@layout/fragment_post_feed">
+        <action
+            android:id="@+id/action_postFeedFragment_to_newPostFragment"
+            app:destination="@id/newPostFragment" />
+        <action
+            android:id="@+id/action_postFeedFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_postFeedFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_postFeedFragment_to_showPhotoFragment"
+            app:destination="@id/showPhotoFragment" />
+        <action
+            android:id="@+id/action_postFeedFragment_to_postUsersListFragment"
+            app:destination="@id/postUsersListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newPostFragment"
+        android:name="com.example.nework.ui.NewPostFragment"
+        android:label="fragment_new_post"
+        tools:layout="@layout/fragment_new_post">
+        <action
+            android:id="@+id/action_newPostFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_newPostFragment_to_choosePostUsersFragment"
+            app:destination="@id/choosePostUsersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventFeedFragment"
+        android:name="com.example.nework.ui.EventFeedFragment"
+        android:label="fragment_event_feed"
+        tools:layout="@layout/fragment_event_feed">
+        <action
+            android:id="@+id/action_eventFeedFragment_to_newEventFragment"
+            app:destination="@id/newEventFragment" />
+        <action
+            android:id="@+id/action_eventFeedFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_eventFeedFragment_to_showPhotoFragment"
+            app:destination="@id/showPhotoFragment" />
+        <action
+            android:id="@+id/action_eventFeedFragment_to_eventUsersListFragment"
+            app:destination="@id/eventUsersListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newEventFragment"
+        android:name="com.example.nework.ui.NewEventFragment"
+        android:label="fragment_new_event"
+        tools:layout="@layout/fragment_new_event">
+        <action
+            android:id="@+id/action_newEventFragment_to_chooseEventUsersFragment"
+            app:destination="@id/chooseEventUsersFragment" />
+        <action
+            android:id="@+id/action_newEventFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.nework.ui.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps">
+    </fragment>
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.nework.ui.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in">
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.nework.ui.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_addAvatarFragment"
+            app:destination="@id/addAvatarFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addAvatarFragment"
+        android:name="com.example.nework.ui.AddAvatarFragment"
+        android:label="fragment_add_avatar"
+        tools:layout="@layout/fragment_add_avatar">
+    </fragment>
+
+    <fragment
+        android:id="@+id/showPhotoFragment"
+        android:name="com.example.nework.ui.ShowPhotoFragment"
+        android:label="fragment_show_photo"
+        tools:layout="@layout/fragment_show_photo">
+    </fragment>
+
+    <fragment
+        android:id="@+id/postUsersListFragment"
+        android:name="com.example.nework.ui.PostUsersListFragment"
+        android:label="fragment_post_users_list"
+        tools:layout="@layout/fragment_post_users_list">
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventUsersListFragment"
+        android:name="com.example.nework.ui.EventUsersListFragment"
+        android:label="fragment_post_users_list"
+        tools:layout="@layout/fragment_post_users_list">
+    </fragment>
+
+    <fragment
+        android:id="@+id/choosePostUsersFragment"
+        android:name="com.example.nework.ui.ChoosePostUsersFragment"
+        android:label="fragment_choose_post_users"
+        tools:layout="@layout/fragment_choose_post_users">
+    </fragment>
+
+    <fragment
+        android:id="@+id/chooseEventUsersFragment"
+        android:name="com.example.nework.ui.ChooseEventUsersFragment"
+        android:label="fragment_choose_post_users"
+        tools:layout="@layout/fragment_choose_post_users">
+    </fragment>
+
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.example.nework.ui.ContactsFragment"
+        android:label="fragment_contacts"
+        tools:layout="@layout/fragment_contacts">
+    </fragment>
+
+    <fragment
+        android:id="@+id/newJobFragment"
+        android:name="com.example.nework.ui.NewJobFragment"
+        android:label="fragment_new_job"
+        tools:layout="@layout/fragment_new_job">
+    </fragment>
+
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.nework.ui.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile">
+    </fragment>
+
+</navigation>
