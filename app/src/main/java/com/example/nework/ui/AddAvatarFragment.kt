@@ -39,8 +39,6 @@ class AddAvatarFragment : Fragment() {
     ): View? {
         val binding = FragmentAddAvatarBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.add_avatar)
-
         val pickPhotoLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 when (it.resultCode) {

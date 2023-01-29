@@ -157,7 +157,6 @@ class MapsFragment : Fragment() {
 
         val binding = FragmentMapsBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.map)
         this.binding = binding
         binding.map.apply {
             userLocation = MapKitFactory.getInstance().createUserLocationLayer(mapWindow)

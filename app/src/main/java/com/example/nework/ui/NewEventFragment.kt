@@ -46,8 +46,6 @@ class NewEventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        (activity as AppActivity).supportActionBar?.title = "Редактирование события"
-
         val binding = FragmentNewEventBinding.inflate(
             inflater,
             container,

@@ -1,6 +1,7 @@
 package com.example.nework.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -42,7 +43,10 @@ class UsersListViewHolder(
                 listener.openUserProfile(user.id)
             }
             author.text = user.name
-
+            like.visibility = if (user.isLiked) View.VISIBLE else View.GONE
+            mention.visibility = if (user.isMentioned) View.VISIBLE else View.GONE
+            participate.visibility = if (user.isParticipating) View.VISIBLE else View.GONE
+            speaker.visibility = if (user.isSpeaker) View.VISIBLE else View.GONE
         }
     }
 }

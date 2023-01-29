@@ -27,8 +27,6 @@ class EventUsersListFragment: Fragment() {
     ): View {
         val binding = FragmentPostUsersListBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.event_users)
-
         val viewModel: EventViewModel by activityViewModels()
 
         val adapter = UsersListAdapter(object : UsersListInteractionListener {

@@ -36,8 +36,6 @@ class NewJobFragment: Fragment() {
             false
         )
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.add_job)
-
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             Snackbar.make(binding.root, R.string.skip_edit_question, Snackbar.LENGTH_SHORT).setAction(R.string.exit) {
                 viewModel.deleteEditJob()

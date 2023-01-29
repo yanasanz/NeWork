@@ -56,16 +56,7 @@ class UserProfileViewModel @Inject constructor(
     val data: MutableLiveData<List<UserResponse>> = userRepository.data
     val userData: MutableLiveData<UserResponse> = userRepository.userData
     val jobData: MutableLiveData<List<Job>> = jobRepository.data
-    var postData: Flow<PagingData<PostResponse>> = appAuth
-        .authStateFlow
-        .flatMapLatest { (myId, _) ->
-            val cached = postRepository.data.cachedIn(viewModelScope)
-            cached.map { pagingData ->
-                pagingData.map {
-                    it.copy(ownedByMe = it.authorId.toLong() == myId)
-                }
-            }
-        }
+    val postData: Flow<PagingData<PostResponse>> = postRepository.data
 
     private val _dataState = MutableLiveData<FeedModelState>()
     val dataState: LiveData<FeedModelState>
@@ -144,17 +135,5 @@ class UserProfileViewModel @Inject constructor(
 
     fun addEndDate(date: String) {
         newJob.value = newJob.value?.copy(finish = date)
-    }
-
-    fun getUserPosts(id: Int) {
-        postData = postRepository.data
-        postData = postData.map { it.filter { it.authorId == id }}
-        viewModelScope.launch {
-            try {
-                postRepository.getUserPosts(postData, id)
-            } catch (e: Exception) {
-                _dataState.value = FeedModelState(error = true)
-            }
-        }
     }
 }

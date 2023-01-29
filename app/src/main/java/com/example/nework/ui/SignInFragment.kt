@@ -35,8 +35,6 @@ class SignInFragment : Fragment() {
     ): View? {
         val binding = FragmentSignInBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.sign_in)
-
         binding.signInButton.setOnClickListener {
             val login = binding.login.text.toString()
             val pass = binding.password.text.toString()

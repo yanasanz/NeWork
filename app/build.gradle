@@ -58,7 +58,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.5.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def core_version = '1.9.0'
-    def appcompat_version = '1.5.1'
+    def appcompat_version = '1.6.0'
     def constraintlayout_version = '2.1.4'
     def swiperefreshlayout_version = "1.1.0"
     def coordinatorlayout_version = "1.2.0"
@@ -71,7 +71,7 @@ dependencies {
     def mdc_version = '1.7.0'
     def fragment_version = '1.5.5'
     def nav_version = '2.5.3'
-    def room_version = '2.4.3'
+    def room_version = '2.5.0'
     def glide_version = '4.14.1'
     def retrofit_version = "2.9.0"
     def retrofitgson_version = "2.9.0"
@@ -85,7 +85,7 @@ dependencies {
 
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.20"
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
@@ -96,6 +96,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    //noinspection LifecycleAnnotationProcessorWithJava8
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     implementation "com.google.android.material:material:$mdc_version"
     implementation 'androidx.fragment:fragment-ktx:fragment_version'

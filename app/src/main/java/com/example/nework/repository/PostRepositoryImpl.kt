@@ -39,12 +39,18 @@ class PostRepositoryImpl @Inject constructor(
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
-            val usersList = response.body()?.users?.values?.toMutableList()!!
-            postUsersData.postValue(usersList)
+            val usersList = response.body()?.users!!
+            for ((key, value) in usersList) {
+                if (post.likeOwnerIds.contains(key)) value.isLiked = true
+                if (post.mentionIds.contains(key)) value.isMentioned = true
+            }
+            val list = usersList.values.toMutableList()
+            postUsersData.postValue(list)
         } catch (e: IOException) {
             throw NetworkError
         }
     }
+
 
     override suspend fun removePostById(id: Int) {
         try {
@@ -133,7 +139,8 @@ class PostRepositoryImpl @Inject constructor(
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             } else {
-                val body = response.body() ?: throw ApiError(response.code(), response.message())
+                val body =
+                    response.body() ?: throw ApiError(response.code(), response.message())
                 dao.insert(PostEntity.fromDto(body))
             }
         } catch (e: IOException) {
@@ -174,10 +181,6 @@ class PostRepositoryImpl @Inject constructor(
         } catch (e: IOException) {
             throw NetworkError
         }
-    }
-
-    override fun getUserPosts(data: Flow<PagingData<PostResponse>>, id: Int) {
-        this.data = data.map { it.filter { it.authorId == id }}
     }
 
 }

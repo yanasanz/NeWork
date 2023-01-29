@@ -21,7 +21,6 @@ class ShowPhotoFragment: Fragment() {
             container,
             false
         )
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.photo)
         val url = arguments?.textArg
         binding.imageView.load(url)
 

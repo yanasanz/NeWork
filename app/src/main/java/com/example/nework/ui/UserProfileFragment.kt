@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.filter
 import com.example.nework.R
 import com.example.nework.adapter.*
 import com.example.nework.databinding.FragmentUserProfileBinding
@@ -27,6 +29,8 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -34,12 +38,6 @@ class UserProfileFragment : Fragment() {
     val userProfileViewModel: UserProfileViewModel by activityViewModels()
     val authViewModel: AuthViewModel by activityViewModels()
     val postViewModel: PostViewModel by activityViewModels()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (!authViewModel.authenticated && arguments == null)
-            findNavController().navigate(R.id.signInFragment)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +54,6 @@ class UserProfileFragment : Fragment() {
                     val userId = it.toInt()
                     userProfileViewModel.getUserById(userId)
                     userProfileViewModel.getUserJobs(userId)
-                    userProfileViewModel.getUserPosts(userId)
                 }
             } else if (authViewModel.authenticated && arguments == null) {
                 binding.addJob.visibility = View.VISIBLE
@@ -64,8 +61,6 @@ class UserProfileFragment : Fragment() {
                 val myId = userProfileViewModel.myId.toInt()
                 userProfileViewModel.getUserById(myId)
                 userProfileViewModel.getMyJobs()
-                userProfileViewModel.getUserPosts(myId)
-
             }
         }
 
@@ -99,7 +94,7 @@ class UserProfileFragment : Fragment() {
         }
 
         userProfileViewModel.userData.observe(viewLifecycleOwner) {
-            (activity as AppActivity?)?.supportActionBar?.title = it.name
+            (activity as AppCompatActivity?)?.supportActionBar?.title = it.name
             binding.name.text = it.name
             binding.avatar.loadCircleCrop(it.avatar)
         }
@@ -183,7 +178,11 @@ class UserProfileFragment : Fragment() {
 
         lifecycleScope.launchWhenCreated {
             println(userProfileViewModel.postData.toString())
-            userProfileViewModel.postData.collectLatest(postAdapter::submitData)
+            arguments?.textArg?.let {
+                val userId = it.toInt()
+                val data = userProfileViewModel.postData.map { it.filter { it.authorId == userId } }
+                data.collectLatest(postAdapter::submitData)
+            }
         }
 
         binding.addJob.setOnClickListener {

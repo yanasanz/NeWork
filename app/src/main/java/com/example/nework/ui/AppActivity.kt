@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.example.nework.R
 import com.example.nework.auth.AppAuth
@@ -43,6 +44,8 @@ class AppActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityAppBinding
 
+    private lateinit var appBarConfiguration: AppBarConfiguration
+
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,13 +66,34 @@ class AppActivity : AppCompatActivity() {
                 else -> bottomNavigation.visibility = View.GONE
             }
         }
-        val appBar = AppBarConfiguration(
-            setOf(
-                R.id.postFeedFragment, R.id.eventFeedFragment, R.id.contactsFragment, R.id.userProfileFragment
-            )
-        )
-        setupActionBarWithNavController(navController, appBar)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigation.setupWithNavController(navController)
+        bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.postFeedFragment -> {
+                    navController.navigate(R.id.postFeedFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.eventFeedFragment -> {
+                    navController.navigate(R.id.eventFeedFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.contactsFragment -> {
+                    navController.navigate(R.id.contactsFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.userProfileFragment -> {
+                    if (!viewModel.authenticated) {
+                        navController.navigate(R.id.signInFragment)
+                    } else {
+                        navController.navigate(R.id.userProfileFragment)
+                    }
+                }
+            }
+            return@setOnItemSelectedListener false
+        }
+
 
 
         viewModel.data.observe(this) {
@@ -117,13 +141,19 @@ class AppActivity : AppCompatActivity() {
                 getErrorDialog(this@AppActivity, code, 9000)?.show()
                 return
             }
-            Toast.makeText(this@AppActivity, R.string.google_api_unavailable_message, Toast.LENGTH_LONG)
+            Toast.makeText(
+                this@AppActivity,
+                R.string.google_api_unavailable_message,
+                Toast.LENGTH_LONG
+            )
                 .show()
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.navHostFragment)
-        return navController.navigateUp()
+        return navController.navigateUp(appBarConfiguration)
+               // || super.onSupportNavigateUp()
     }
+
 }

@@ -8,16 +8,17 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nework.R
-import com.example.nework.adapter.PostRecyclerView
 import com.example.nework.adapter.PagingLoadStateAdapter
 import com.example.nework.adapter.PostAdapter
 import com.example.nework.adapter.PostInteractionListener
+import com.example.nework.adapter.PostRecyclerView
 import com.example.nework.databinding.FragmentPostFeedBinding
 import com.example.nework.dto.PostResponse
 import com.example.nework.enumeration.AttachmentType
@@ -30,22 +31,24 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 
+
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class PostFeedFragment : Fragment() {
 
+    private var binding: FragmentPostFeedBinding? = null
+
     private val viewModel: PostViewModel by activityViewModels()
-    private val authViewModel: AuthViewModel by activityViewModels()
-    lateinit var mediaRecyclerView: PostRecyclerView
+    private val authViewModel: AuthViewModel by viewModels()
+    private var mediaRecyclerView: PostRecyclerView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentPostFeedBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.posts)
+        val binding = FragmentPostFeedBinding.inflate(inflater, container, false)
 
         authViewModel.data.observeForever {
             if (!authViewModel.authenticated) {
@@ -184,18 +187,23 @@ class PostFeedFragment : Fragment() {
     }
 
     override fun onResume() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.createPlayer()
+        mediaRecyclerView?.createPlayer()
         super.onResume()
     }
 
     override fun onPause() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
+        mediaRecyclerView?.releasePlayer()
         super.onPause()
     }
 
 
     override fun onStop() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
+        mediaRecyclerView?.releasePlayer()
         super.onStop()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

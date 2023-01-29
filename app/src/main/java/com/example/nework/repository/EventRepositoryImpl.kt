@@ -38,8 +38,14 @@ class EventRepositoryImpl @Inject constructor(
             if (!response.isSuccessful) {
                 throw ApiError(response.code(), response.message())
             }
-            val usersList = response.body()?.users?.values?.toMutableList()!!
-            eventUsersData.postValue(usersList)
+            val usersList = response.body()?.users!!
+            for ((key, value) in usersList) {
+                if (event.likeOwnerIds.contains(key)) value.isLiked = true
+                if (event.speakerIds.contains(key)) value.isSpeaker = true
+                if (event.participantsIds.contains(key)) value.isParticipating = true
+            }
+            val list = usersList.values.toMutableList()
+            eventUsersData.postValue(list)
         } catch (e: IOException) {
             throw NetworkError
         }

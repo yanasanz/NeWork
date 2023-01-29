@@ -46,5 +46,4 @@ class AppDbModule {
     @Provides
     fun provideUserDao(appDb: AppDb): UserDao =
         appDb.userDao()
-
 }

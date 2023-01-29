@@ -18,7 +18,6 @@ interface PostRepository {
     suspend fun getUsers(): List<UserResponse>
     suspend fun getPostCreateRequest(id: Int): PostCreateRequest
     suspend fun getUserById(id: Int): UserResponse
-    fun getUserPosts(data: Flow<PagingData<PostResponse>>, id: Int)
     suspend fun addMediaToPost(type: AttachmentType, file: MultipartBody.Part): Attachment
     suspend fun savePost(post: PostCreateRequest)
 }

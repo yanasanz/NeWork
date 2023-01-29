@@ -21,8 +21,11 @@ import java.util.*
 @AndroidEntryPoint
 class ContactsFragment : Fragment() {
 
+    private var binding: FragmentContactsBinding? = null
+
     val userViewModel: UserProfileViewModel by activityViewModels()
     lateinit var adapter: ContactAdapter
+    private var searchView: SearchView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,7 @@ class ContactsFragment : Fragment() {
         inflater.inflate(R.menu.menu_search, menu)
 
         val search = menu.findItem(R.id.menu_search)
-        val searchView = search?.actionView as? SearchView
+        searchView = search?.actionView as? SearchView
         searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -68,8 +71,6 @@ class ContactsFragment : Fragment() {
     ): View {
         val binding = FragmentContactsBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.contacts)
-
         adapter = ContactAdapter(object : ContactInteractionListener {
             override fun openUserProfile(id: Int) {
                 val idAuthor = id.toString()
@@ -95,5 +96,10 @@ class ContactsFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

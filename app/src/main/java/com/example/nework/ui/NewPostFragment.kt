@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.provider.MediaStore.Video
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +22,6 @@ import com.example.nework.enumeration.AttachmentType.*
 import com.example.nework.ui.MapsFragment.Companion.pointArg
 import com.example.nework.ui.PostFeedFragment.Companion.intArg
 import com.example.nework.ui.ShowPhotoFragment.Companion.textArg
-import com.example.nework.utils.Utils
 import com.example.nework.viewmodel.PostViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.constant.ImageProvider
@@ -33,7 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import java.io.File
+import okhttp3.RequestBody.Companion.toRequestBody
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -44,8 +42,6 @@ class NewPostFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.create_post)
 
         val binding = FragmentNewPostBinding.inflate(
             inflater,
@@ -135,15 +131,16 @@ class NewPostFragment : Fragment() {
                 val data = activityResult.data
 
                 if (resultCode == Activity.RESULT_OK) {
-                    val selectedVideoUri = data?.data!!
-                    val selectedVideoPath =
-                        Utils.getVideoPathFromUri(selectedVideoUri, requireActivity())
-                    if (selectedVideoPath != null) {
-                        val resultFile = File(selectedVideoPath)
+                    val selectedVideoUri = data?.data
+                    if (selectedVideoUri != null) {
+                        val contentResolver = requireContext().contentResolver
                         file = MultipartBody.Part.createFormData(
-                            "file", resultFile.name, resultFile.asRequestBody()
+                            "file",
+                            "video",
+                            requireNotNull(contentResolver.openInputStream(selectedVideoUri)).readBytes()
+                                .toRequestBody()
                         )
-                        viewModel.changeMedia(selectedVideoUri, resultFile, VIDEO)
+                        viewModel.changeMedia(selectedVideoUri, null, VIDEO)
                         viewModel.addMediaToPost(VIDEO, file)
                     }
                 } else {
@@ -166,26 +163,33 @@ class NewPostFragment : Fragment() {
                 val data = activityResult.data
 
                 if (resultCode == Activity.RESULT_OK) {
-                    val selectedAudioUri = data?.data!!
-                    val selectedAudioPath =
-                        Utils.getAudioPathFromUri(selectedAudioUri, requireActivity())
-                    if (selectedAudioPath != null) {
-                        val resultFile = File(selectedAudioPath)
+                    val selectedAudioUri = data?.data
+                    if (selectedAudioUri != null) {
+                        val contentResolver = requireContext().contentResolver
                         file = MultipartBody.Part.createFormData(
-                            "file", resultFile.name, resultFile.asRequestBody()
+                            "file",
+                            "audio",
+                            requireNotNull(contentResolver.openInputStream(selectedAudioUri)).readBytes()
+                                .toRequestBody()
                         )
-                        viewModel.changeMedia(selectedAudioUri, resultFile, AUDIO)
+                        viewModel.changeMedia(selectedAudioUri, null, AUDIO)
                         viewModel.addMediaToPost(AUDIO, file)
                     }
+                } else {
+                    Snackbar.make(binding.root, R.string.video_container, Snackbar.LENGTH_SHORT)
+                        .show()
                 }
             }
 
         binding.pickAudio.setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-            )
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "audio/*"
             pickAudioLauncher.launch(intent)
+//            val intent = Intent(
+//                Intent.ACTION_PICK,
+//                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+//            )
         }
 
         viewModel.media.observe(viewLifecycleOwner)

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/postFeedFragment"
         android:name="com.example.nework.ui.PostFeedFragment"
-        android:label="fragment_post_feed"
+        android:label="@string/posts"
         tools:layout="@layout/fragment_post_feed">
         <action
             android:id="@+id/action_postFeedFragment_to_newPostFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/newPostFragment"
         android:name="com.example.nework.ui.NewPostFragment"
-        android:label="fragment_new_post"
+        android:label="@string/create_post"
         tools:layout="@layout/fragment_new_post">
         <action
             android:id="@+id/action_newPostFragment_to_mapsFragment"
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/eventFeedFragment"
         android:name="com.example.nework.ui.EventFeedFragment"
-        android:label="fragment_event_feed"
+        android:label="@string/events"
         tools:layout="@layout/fragment_event_feed">
         <action
             android:id="@+id/action_eventFeedFragment_to_newEventFragment"
@@ -62,7 +62,7 @@
     <fragment
         android:id="@+id/newEventFragment"
         android:name="com.example.nework.ui.NewEventFragment"
-        android:label="fragment_new_event"
+        android:label="@string/create_event"
         tools:layout="@layout/fragment_new_event">
         <action
             android:id="@+id/action_newEventFragment_to_chooseEventUsersFragment"
@@ -75,21 +75,21 @@
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.nework.ui.MapsFragment"
-        android:label="fragment_maps"
+        android:label="@string/map"
         tools:layout="@layout/fragment_maps">
     </fragment>
 
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.nework.ui.SignInFragment"
-        android:label="fragment_sign_in"
+        android:label="@string/sign_in"
         tools:layout="@layout/fragment_sign_in">
     </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.nework.ui.RegisterFragment"
-        android:label="fragment_register"
+        android:label="@string/sign_up"
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_addAvatarFragment"
@@ -99,56 +99,56 @@
     <fragment
         android:id="@+id/addAvatarFragment"
         android:name="com.example.nework.ui.AddAvatarFragment"
-        android:label="fragment_add_avatar"
+        android:label="@string/add_avatar"
         tools:layout="@layout/fragment_add_avatar">
     </fragment>
 
     <fragment
         android:id="@+id/showPhotoFragment"
         android:name="com.example.nework.ui.ShowPhotoFragment"
-        android:label="fragment_show_photo"
+        android:label="@string/photo"
         tools:layout="@layout/fragment_show_photo">
     </fragment>
 
     <fragment
         android:id="@+id/postUsersListFragment"
         android:name="com.example.nework.ui.PostUsersListFragment"
-        android:label="fragment_post_users_list"
+        android:label="@string/post_users"
         tools:layout="@layout/fragment_post_users_list">
     </fragment>
 
     <fragment
         android:id="@+id/eventUsersListFragment"
         android:name="com.example.nework.ui.EventUsersListFragment"
-        android:label="fragment_post_users_list"
+        android:label="@string/event_users"
         tools:layout="@layout/fragment_post_users_list">
     </fragment>
 
     <fragment
         android:id="@+id/choosePostUsersFragment"
         android:name="com.example.nework.ui.ChoosePostUsersFragment"
-        android:label="fragment_choose_post_users"
+        android:label="@string/choose_post_users"
         tools:layout="@layout/fragment_choose_post_users">
     </fragment>
 
     <fragment
         android:id="@+id/chooseEventUsersFragment"
         android:name="com.example.nework.ui.ChooseEventUsersFragment"
-        android:label="fragment_choose_post_users"
+        android:label="@string/choose_event_users"
         tools:layout="@layout/fragment_choose_post_users">
     </fragment>
 
     <fragment
         android:id="@+id/contactsFragment"
         android:name="com.example.nework.ui.ContactsFragment"
-        android:label="fragment_contacts"
+        android:label="@string/contacts"
         tools:layout="@layout/fragment_contacts">
     </fragment>
 
     <fragment
         android:id="@+id/newJobFragment"
         android:name="com.example.nework.ui.NewJobFragment"
-        android:label="fragment_new_job"
+        android:label="@string/add_job"
         tools:layout="@layout/fragment_new_job">
     </fragment>
 

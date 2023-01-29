@@ -26,8 +26,6 @@ class ChooseEventUsersFragment: Fragment() {
     ): View {
         val binding = FragmentChoosePostUsersBinding.inflate(inflater, container, false)
 
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.choose_event_users)
-
         val eventViewModel: EventViewModel by activityViewModels()
 
         eventViewModel.getUsers()

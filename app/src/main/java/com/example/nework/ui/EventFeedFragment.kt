@@ -32,9 +32,11 @@ import kotlinx.coroutines.flow.collectLatest
 @AndroidEntryPoint
 class EventFeedFragment : Fragment() {
 
+    private var binding: FragmentEventFeedBinding? = null
+
     private val authViewModel: AuthViewModel by viewModels()
     private val viewModel: EventViewModel by activityViewModels()
-    lateinit var mediaRecyclerView: EventRecyclerView
+    private var mediaRecyclerView: EventRecyclerView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,8 +44,6 @@ class EventFeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentEventFeedBinding.inflate(inflater, container, false)
-
-        (activity as AppActivity).supportActionBar?.title = getString(R.string.events)
 
         authViewModel.data.observeForever {
             if (!authViewModel.authenticated) {
@@ -200,17 +200,22 @@ class EventFeedFragment : Fragment() {
     }
 
     override fun onResume() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.createPlayer()
+        mediaRecyclerView?.createPlayer()
         super.onResume()
     }
 
     override fun onPause() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
+        mediaRecyclerView?.releasePlayer()
         super.onPause()
     }
 
     override fun onStop() {
-        if(::mediaRecyclerView.isInitialized) mediaRecyclerView.releasePlayer()
+        mediaRecyclerView?.releasePlayer()
         super.onStop()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
